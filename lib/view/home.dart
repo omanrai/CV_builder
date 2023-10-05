@@ -7,13 +7,14 @@ import 'dart:ui' as ui;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 import '../template/text_style.dart';
+import 'view_cv.dart';
 
-class HomePage extends StatefulWidget {
+class TraditionalCVtemplate1 extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<TraditionalCVtemplate1> createState() => _TraditionalCVtemplate1State();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TraditionalCVtemplate1State extends State<TraditionalCVtemplate1> {
   GlobalKey globalKey = GlobalKey();
 
   Future<Uint8List> convertWidgetToImage() async {
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     return byteData!.buffer.asUint8List();
   }
 
+// for save image
   Future<void> saveImageToDevice(Uint8List imageData) async {
     final result = await ImageGallerySaver.saveImage(imageData);
     if (result['isSuccess']) {
@@ -54,13 +56,10 @@ class _HomePageState extends State<HomePage> {
               RepaintBoundary(
                 key: globalKey,
                 child: Container(
-                  height: MediaQuery.of(context).size.height + 200,
-                  // color: Colors.amber,
+                  color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Center(
-                          child: HeadlineTextStyle(name: "CURRICULUM-VITAE")),
                       Container(
                         width: double.infinity,
                         color: Colors.black45,
@@ -124,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                               // textAlign: TextAlign.justify,
                               decoration: InputDecoration(
                                 labelText: 'Enter your bio',
-                                border: OutlineInputBorder(),
+                                // border: OutlineInputBorder(),
                               ),
                               keyboardType: TextInputType.multiline,
                               textInputAction: TextInputAction.done,
@@ -408,43 +407,43 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      RegularTextWeight500(name: "Dear Sir/Madam,"),
-                      Wrap(
-                        children: [
-                          Text(
-                            "I assure you that above given details are true based on my experience. If you have any queries you can call me to confirm it.",
-                            textAlign: TextAlign.justify,
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     convertWidgetToImage().then((data) {
-              //       setState(() {
-              //         imageData = data;
-              //       });
-              //       saveImageToDevice(data);
-              //     });
-              //   },
-              //   child: Text('Convert to Image'),
-              // ),
-              ElevatedButton(
-                onPressed: () {
-                  convertWidgetToImage().then((image) {
-                    setState(() {
-                      imageData = image;
-                    });
-                    saveImageToDevice(image);
-                  });
-                },
-                child: Text('Convert and Save Image'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      convertWidgetToImage().then((image) {
+                        setState(() {
+                          imageData = image;
+                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewCV(imageData: image),
+                          ),
+                        );
+                      });
+                    },
+                    child: Text('View CV'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      convertWidgetToImage().then((image) {
+                        setState(() {
+                          imageData = image;
+                        });
+                        saveImageToDevice(image);
+                      });
+                    },
+                    child: Text('Save Image'),
+                  ),
+                  // if (imageData != null) Image.memory(imageData!),
+                ],
               ),
-
-              if (imageData != null) Image.memory(imageData!),
             ],
           ),
         ),

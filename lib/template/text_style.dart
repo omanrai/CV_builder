@@ -16,7 +16,8 @@ class HeadlineTextStyle extends StatelessWidget {
         fontSize: 18,
         fontWeight: FontWeight.bold,
         decoration: underline,
-        decorationThickness: 2.0,
+        decorationThickness: 1.5,
+        // decorationStyle: TextDecorationStyle.solid,
       ),
     );
   }
@@ -44,6 +45,33 @@ class RegularTextWeight500 extends StatelessWidget {
     return Text(
       name,
       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    );
+  }
+}
+
+//how to give spacing between text and underline
+
+class TextnUnderlineSpace extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8.0), // Adjust the spacing as needed
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.black,
+              width: 1.5, // Adjust the thickness as needed
+            ),
+          ),
+        ),
+        child: Text(
+          'Your Text',
+          style: TextStyle(
+            decoration: TextDecoration.none, // Remove the default underline
+          ),
+        ),
+      ),
     );
   }
 }
