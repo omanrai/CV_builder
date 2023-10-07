@@ -75,3 +75,55 @@ class TextnUnderlineSpace extends StatelessWidget {
     );
   }
 }
+
+class BulletList extends StatelessWidget {
+  BulletList({
+    required this.litsItem1,
+    this.litsItem2,
+  });
+  final String litsItem1;
+  final String? litsItem2;
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      textAlign: TextAlign.justify,
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: '•  ',
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+          TextSpan(
+            text: litsItem1,
+            style: TextStyle(
+              color: Colors.black, // Set the desired color
+            ),
+          ),
+          TextSpan(text: '\n'), // Add a line break between items
+          TextSpan(
+            text: '•  ',
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+          TextSpan(
+            text:
+                // 'A SLC Passed from Sunsari Multiple Campus capus capmpudfjh dfgsdfghsdf',
+                litsItem2,
+            style: TextStyle(
+              color: Colors.black,
+              // Set the desired color
+            ),
+          ),
+          // TextSpan(text: '\n'), // Add a line break between items
+          // TextSpan(
+          //   text: '•  ',
+          //   style: TextStyle(
+          //       fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+          // ),
+        ],
+      ),
+    );
+  }
+}

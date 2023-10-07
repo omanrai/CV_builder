@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:cv/template/sizedBox.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
@@ -24,16 +25,13 @@ class ViewCV extends StatelessWidget {
         title: Text('View CV'),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.memory(imageData),
-            ElevatedButton(
-              onPressed: saveImageToDevice,
-              child: Text('Save to Gallery'),
-            ),
-          ],
-        ),
+      body: Container(
+          color: Colors.grey[200],
+          width: double.infinity,
+          child: InteractiveViewer(child: Image.memory(imageData))),
+      floatingActionButton: FloatingActionButton(
+        onPressed: saveImageToDevice,
+        child: Text('Save to Gallery'),
       ),
     );
   }
